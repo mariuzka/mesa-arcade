@@ -171,3 +171,20 @@ class CellArtist:
 
     def draw(self):
         self.sprite_list.draw()
+
+
+class PropertyLayerArtist(CellArtist):
+    def __init__(
+            self,
+            layer_name,
+            color = "blue",
+            color_attribute = None,
+            color_map = "bwr",
+            color_vmin = None,
+            color_vmax=None,
+            shape="rect",
+            dynamic_color=True,
+            dynamic_position=True,
+            dynamic_agent_set=True,
+            ):
+        super().__init__(color, color_attribute, color_map, color_vmin, color_vmax, shape, dynamic_color, dynamic_position, dynamic_agent_set)

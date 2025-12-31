@@ -1,0 +1,68 @@
+[tool.black]
+line-length = 99
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+ignore_missing_imports = false
+show_error_codes = true
+exclude = ["docs"]
+
+[tool.poetry]
+name = "mesa-arcade"
+version = "0.0.1"
+packages = [{include = "mesa_arcade", from="src/"}]
+description = "Visualize mesa models using python arcade."
+authors = [
+  "Marius Kaffai",
+]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<4.0"
+arcade = "^3.3.3"
+mesa = "^3.4.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=7.2.0"
+pytest-regressions = ">=2.4.1"
+ipython = "^8.7.0"
+ipykernel = "^6.17.1"
+solara = "*"
+networkx = "*"
+matplotlib = "*"
+altair = "*"
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.1.0"
+ipywidgets = "^8.0.2"
+sphinx-rtd-theme = "^1.1.1"
+nbsphinx = "^0.9.3"
+sphinx-autodoc-typehints = "^1.24.0"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
+
+[tool.ruff]
+fix = true
+unsafe-fixes = true
+include = ["*.py", "*.pyi", "**/pyproject.toml", "*.ipynb"]
+target-version = "py312"
+line-length = 99
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -99,8 +99,8 @@ class Artist:
         )
 
         if self.jitter:
-            x += sprite.mesarc_x_jitter
-            y += sprite.mesarc_y_jitter
+            x += sprite.mesar_x_jitter
+            y += sprite.mesar_y_jitter
 
         sprite.center_x = x
         sprite.center_y = y
@@ -138,8 +138,8 @@ class Artist:
             raise ValueError("`shape` must be on of: 'rect', 'circle'.")
         
         if self.jitter:
-            sprite.mesarc_x_jitter = (self.model.random.random() - 0.5) * self.figure.cell_width
-            sprite.mesarc_y_jitter = (self.model.random.random() - 0.5) * self.figure.cell_height
+            sprite.mesar_x_jitter = (self.model.random.random() - 0.5) * self.figure.cell_width
+            sprite.mesar_y_jitter = (self.model.random.random() - 0.5) * self.figure.cell_height
 
         self.set_sprite_position(
             xy_position=self.get_xy_position(entity=entity), 

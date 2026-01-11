@@ -4,7 +4,7 @@ from mesa.examples.advanced.sugarscape_g1mt.model import SugarscapeG1mt
 # artists
 agents = mesar.CellAgentArtists(
     shape="circle",
-    )
+)
 sugar = mesar.CellArtists(
     color_attribute="sugar",
     color_map="Greens",
@@ -13,7 +13,7 @@ sugar = mesar.CellArtists(
     jitter=True,
     size=0.3,
     entity_selector=lambda cell: cell.sugar > 0,
-    )
+)
 spice = mesar.CellArtists(
     color_attribute="spice",
     color_map="Reds",
@@ -22,7 +22,7 @@ spice = mesar.CellArtists(
     jitter=True,
     size=0.3,
     entity_selector=lambda cell: cell.spice > 0,
-    )
+)
 
 # space plot
 space_plot = mesar.GridSpacePlot(artists=[sugar, spice, agents])
@@ -41,9 +41,8 @@ canvas = mesar.Canvas(
         space_plot,
         price_plot,
         traders_plot,
-        ],
-    controllers=[
-    ]
+    ],
+    controllers=[],
 )
 
 # show gui window

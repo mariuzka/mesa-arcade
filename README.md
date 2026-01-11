@@ -17,7 +17,10 @@ Artists are the visual representations of the entities in a mesa model.
 **Example:**
 
 ```python
-
+agents = mesar.CellAgentArtists(
+    color_attribute="type",
+    color_map={0: "blue", 1: "red"},
+)
 ```
 
 ### SpacePlots
@@ -28,6 +31,16 @@ You can add/layer as many artists as you want to.
 - `GridSpacePlot`: Visualizes a grid.
 - `ContinuousSpacePlot`: Visualizes a continuous space.
 
+**Example:**
+
+Let's create a visual representation of a grid and add our a agent artists.
+We could add other artists, too.
+
+```python
+grid_space = mesar.GridSpacePlot(artists=[agents])
+```
+
+
 ### HistoryPlots
 
 Line plots that plot (multiple) values as a function of the simulated time steps.
@@ -35,6 +48,14 @@ Line plots that plot (multiple) values as a function of the simulated time steps
 - `ModelHistoryPlot`: Plots model attributes and data that is collected using `mesa.DataCollector` as a function of the simulated time steps.
 
 - (`AgentHistoryPlot`: On the ToDo-List.)
+
+**Example**
+
+Let's add a `ModelHistorPlot` that visualizes the model attribute `happy`:
+
+```python
+happy_plot = mesar.ModelHistoryPlot(y_attributes=["happy"])
+```
 
 ### Controllers
 

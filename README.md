@@ -1,10 +1,13 @@
 # Mesa-arcade
 
-Mesa-arcade is a Python package which uses Arcade to visualize simulations built with Mesa.
+Mesa-arcade is a Python package that provides **interactive, real-time visualizations** for Mesa agent-based models using the Arcade game engine.  
+It enables fast, desktop-based GUIs with layered spatial plots, time-series charts, and live parameter controls.
+
+⚠️ Mesa-arcade is under active development. APIs may change.
 
 ## Components
 
-To visualize Mesa models, Mesa-arcade offers several components which can/must be combined by you:
+Mesa-arcade follows a compositional design: you define how agents are drawn (Artists), where they are drawn (SpacePlots), what is tracked over time (HistoryPlots), and how parameters can be changed (Controllers), all embedded in a Canvas.
 
 ### Artists
 
@@ -22,7 +25,6 @@ agents = mesar.CellAgentArtists(
     color_map={0: "blue", 1: "red"},
 )
 ```
-<br>
 
 ### SpacePlots
 
@@ -34,13 +36,12 @@ You can add/layer as many artists as you want to.
 
 **Example:**
 
-Let's create a visual representation of a grid and add our a agent artists.
+Let's create a visual representation of a grid and add our agent artists.
 We could add other artists, too.
 
 ```python
 grid_space = mesar.GridSpacePlot(artists=[agents])
 ```
-<br>
 
 ### HistoryPlots
 
@@ -57,14 +58,13 @@ Let's add a `ModelHistoryPlot` that visualizes the model attribute `happy` over 
 ```python
 happy_plot = mesar.ModelHistoryPlot(y_attributes=["happy"])
 ```
-<br>
 
 ### Controllers
 
 Interactive controllers of model attributes and parameters.
 
-- `NumController`: A controller for metric parameters.
-- `CatController`: A controlelr for categorial paremeters.
+- `NumController`: A controller for numeric parameters.
+- `CatController`: A controller for categorical paremeters.
 
 **Example**
 
@@ -99,9 +99,9 @@ canvas.show()
 
 ## Full example
 
-More examples can be found in [`"mesa-arcade/examples/"`](https://github.com/mariuzka/mesa-arcade/tree/main/examples).
+*More examples can be found in [`"/mesa-arcade/examples"`](https://github.com/mariuzka/mesa-arcade/tree/main/examples).*
 
-```{python}
+```python
 import mesa_arcade as mesar
 from mesa.examples.basic.schelling.model import Schelling
 
@@ -113,7 +113,7 @@ agents = mesar.CellAgentArtists(
 )
 
 # space plot
-space = mesar.GridSpacePlot(artists=agents)
+space = mesar.GridSpacePlot(artists=[agents])
 
 # line plot
 happy_plot = mesar.ModelHistoryPlot(y_attributes=["happy"])

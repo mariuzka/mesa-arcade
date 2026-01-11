@@ -14,6 +14,9 @@ Artists are the visual representations of the entities in a mesa model.
 - `CellAgentArtists`: A visual representation for a set of `mesa.CellAgent`s.
 - `ContinuousSpaceAgentArtists`: A visual representation for a set of `mesa.ContinuousSpaceAgent`s.
 
+<br>
+<br>
+
 **Example:**
 
 ```python

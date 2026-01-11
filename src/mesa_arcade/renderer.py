@@ -99,7 +99,7 @@ class Renderer(arcade.View):
             fig_height = self.atomic_height * 33
 
             fig = self.figures[0]
-            fig_x = self.window_width / 2 - fig_width / 2
+            fig_x = self.window_width / 2 - fig_width / 2 + self.atomic_width * 2
             fig_y = self.window_height / 2 - fig_width / 2
             fig.setup(x=fig_x, y=fig_y, width=fig_width, height=fig_height, renderer=self)
 
@@ -170,13 +170,13 @@ class Renderer(arcade.View):
             self.tick_counter_text,
             anchor_x="left",
             anchor_y="top",
-            align_x=int(self.atomic_width * 32),
+            align_x=int(self.atomic_width * 33),
             align_y=int(-self.atomic_height - self.big_button_height * 0.25),
         )
 
     def add_fps_display(self):
         self.fps_text = arcade.gui.widgets.text.UILabel(
-            text=f"Realized FPS: {int(arcade.get_fps(60))}",
+            text=f"FPS: {int(arcade.get_fps(60))}",
             text_color=arcade.color.BLACK,
             font_size=self.font_size,
         )
@@ -184,7 +184,7 @@ class Renderer(arcade.View):
             self.fps_text,
             anchor_x="left",
             anchor_y="top",
-            align_x=int(self.atomic_width * 32),
+            align_x=int(self.atomic_width * 33),
             align_y=int(
                 -self.atomic_height * 3 - self.atomic_height * 0.25,
             ),
@@ -212,7 +212,7 @@ class Renderer(arcade.View):
             min_value=5,
             max_value=60,
             step=5,
-            label="Ticks per second",
+            label="Target FPS",
             _target_object=self,
         )
         self.fps_buttons.renderer = self
@@ -246,7 +246,7 @@ class Renderer(arcade.View):
         self.manager.draw()
 
         # draw fps & tick counter
-        self.fps_text.text = f"Realized FPS: {int(arcade.get_fps(60))}"
+        self.fps_text.text = f"FPS: {int(arcade.get_fps(60))}"
         self.tick_counter_text.text = f"tick: {self.tick}"
 
     def on_update(self, delta_time):

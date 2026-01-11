@@ -46,7 +46,7 @@ class _Controller:
         self.renderer = None
 
     def calculate_align_y(self, i):
-        return round(-(i * (self.renderer.atomic_height * 4)) - self.renderer.atomic_height * 2)
+        return round(-(i * (self.renderer.atomic_height * 3.9)) - self.renderer.atomic_height * 2)
 
 
 class CatController(_Controller):
@@ -244,14 +244,14 @@ class CatControllerButtons(_ControllerButtons):
             font_size=int(self.renderer.atomic_height / 2),
             font_name="arial",
         )
-        FONT_SIZE = int(self.renderer.atomic_height / 1.6)
+        FONT_SIZE = int(self.renderer.atomic_height / 1.3)
         primary_style = create_button_style(font_size=FONT_SIZE)
         active_style = create_button_style(font_size=FONT_SIZE)
         dropdown_style = create_button_style(font_size=FONT_SIZE)
 
         self.dropdown = arcade.gui.UIDropdown(
-            default=value,
-            options=self.options,
+            default=str(value),
+            options=[str(option) for option in self.options],
             width=self.renderer.atomic_width * 6,
             primary_style=primary_style,
             active_style=active_style,

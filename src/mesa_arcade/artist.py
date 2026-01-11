@@ -14,13 +14,12 @@ class Artist:
         color_vmin: float | None = None,
         color_vmax=None,
         shape="rect",
+        size=1,
+        entity_selector = lambda entity: True,
+        jitter=False,
         dynamic_color = True,
         dynamic_position = True,
         dynamic_population = True,
-        entity_selector = lambda entity: True,
-        jitter=False,
-        size=1,
-        
     ):
         self.color = parse_color(color=color)
         self.color_attribute = color_attribute
@@ -201,17 +200,33 @@ class Artist:
 
 class CellAgentArtists(Artist):
     def __init__(
-            self, 
-            color="blue", 
-            shape="circle",
-            *args,
-            **kwargs,
-            ):
+        self,
+        color: str | tuple | list | None = "blue",
+        color_attribute: str | None = None,
+        color_map: str = "bwr",
+        color_vmin: float | None = None,
+        color_vmax=None,
+        shape="circle",
+        size=1,
+        entity_selector = lambda entity: True,
+        jitter=False,
+        dynamic_color = True,
+        dynamic_position = True,
+        dynamic_population = True,
+        ):
         super().__init__(
-            color=color, 
+            color=color,
+            color_attribute=color_attribute,
+            color_map=color_map,
+            color_vmin=color_vmin,
+            color_vmax=color_vmax,
             shape=shape,
-            *args,
-            **kwargs,
+            size=size,
+            entity_selector=entity_selector,
+            jitter=jitter,
+            dynamic_color=dynamic_color,
+            dynamic_position=dynamic_position,
+            dynamic_population=dynamic_population,
             )
     
     def get_population(self):
@@ -237,21 +252,33 @@ class CellAgentArtists(Artist):
     
 class CellArtists(Artist):
     def __init__(
-            self, 
-            color="black",
-            shape="rect",
-            dynamic_position=False,
-            dynamic_population=False,
-            *args, 
-            **kwargs,
-            ):
+        self,
+        color: str | tuple | list | None = "black",
+        color_attribute: str | None = None,
+        color_map: str = "bwr",
+        color_vmin: float | None = None,
+        color_vmax=None,
+        shape="rect",
+        size=1,
+        entity_selector = lambda entity: True,
+        jitter=False,
+        dynamic_color = True,
+        dynamic_position = False,
+        dynamic_population = False,
+        ):
         super().__init__(
             color=color,
+            color_attribute=color_attribute,
+            color_map=color_map,
+            color_vmin=color_vmin,
+            color_vmax=color_vmax,
             shape=shape,
+            size=size,
+            entity_selector=entity_selector,
+            jitter=jitter,
+            dynamic_color=dynamic_color,
             dynamic_position=dynamic_position,
             dynamic_population=dynamic_population,
-            *args, 
-            **kwargs,
             )
     
     def get_population(self):
@@ -277,20 +304,35 @@ class CellArtists(Artist):
 
 class ContinuousSpaceAgentArtists(Artist):
     def __init__(
-            self, 
-            color="blue", 
-            shape="circle",
-            size=2,
-            *args,
-            **kwargs,
-            ):
+        self,
+        color: str | tuple | list | None = "black",
+        color_attribute: str | None = None,
+        color_map: str = "bwr",
+        color_vmin: float | None = None,
+        color_vmax=None,
+        shape="circle",
+        size=2,
+        entity_selector = lambda entity: True,
+        jitter=False,
+        dynamic_color = True,
+        dynamic_position = True,
+        dynamic_population = True,
+        ):
         super().__init__(
-            color=color, 
+            color=color,
+            color_attribute=color_attribute,
+            color_map=color_map,
+            color_vmin=color_vmin,
+            color_vmax=color_vmax,
             shape=shape,
             size=size,
-            *args,
-            **kwargs,
+            entity_selector=entity_selector,
+            jitter=jitter,
+            dynamic_color=dynamic_color,
+            dynamic_position=dynamic_position,
+            dynamic_population=dynamic_population,
             )
+    
     
     def get_population(self):
         return self.model.agents

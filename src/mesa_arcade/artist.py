@@ -58,6 +58,12 @@ class Artist:
 
     def get_xy_position(self, entity):
         pass
+
+    def scale_x(self, x):
+        pass
+
+    def scale_y(self, y):
+        pass
     
     def draw(self):
         self.sprite_list.draw()
@@ -87,16 +93,8 @@ class Artist:
                 assert self.color_vmin is not None and self.color_vmax is not None
     
     def set_sprite_position(self, xy_position, sprite):
-        x = (
-            xy_position[0] * self.figure.cell_width
-            + self.figure.x 
-            + self.figure.cell_width / 2
-        )
-        y = (
-            xy_position[1] * self.figure.cell_height
-            + self.figure.y 
-            + self.figure.cell_height / 2
-        )
+        x = self.scale_x(xy_position[0])
+        y = self.scale_y(xy_position[1])
 
         if self.jitter:
             x += sprite.mesar_x_jitter
@@ -222,6 +220,20 @@ class CellAgentArtists(Artist):
     def get_xy_position(self, entity):
         return entity.cell.coordinate
     
+    def scale_x(self, x):
+        return (
+            x * self.figure.cell_width
+            + self.figure.x 
+            + self.figure.cell_width / 2
+        )
+    
+    def scale_y(self, y):
+        return (
+            y * self.figure.cell_height
+            + self.figure.y 
+            + self.figure.cell_height / 2
+        )
+    
     
 class CellArtists(Artist):
     def __init__(
@@ -247,18 +259,35 @@ class CellArtists(Artist):
     
     def get_xy_position(self, entity):
         return entity.coordinate
+    
+    def scale_x(self, x):
+        return (
+            x * self.figure.cell_width
+            + self.figure.x 
+            + self.figure.cell_width / 2
+        )
+    
+    def scale_y(self, y):
+        return (
+            y * self.figure.cell_height
+            + self.figure.y 
+            + self.figure.cell_height / 2
+        )
+
 
 class ContinuousSpaceAgentArtists(Artist):
     def __init__(
             self, 
             color="blue", 
             shape="circle",
+            size=2,
             *args,
             **kwargs,
             ):
         super().__init__(
             color=color, 
             shape=shape,
+            size=size,
             *args,
             **kwargs,
             )
@@ -268,3 +297,15 @@ class ContinuousSpaceAgentArtists(Artist):
     
     def get_xy_position(self, entity):
         return entity.position
+    
+    def scale_x(self, x):
+        return (
+            x * self.figure.cell_width
+            + self.figure.x 
+        )
+    
+    def scale_y(self, y):
+        return (
+            y * self.figure.cell_height
+            + self.figure.y 
+        )

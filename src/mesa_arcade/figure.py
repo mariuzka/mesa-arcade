@@ -34,6 +34,8 @@ class Figure:
         self.create_empty_figure()
         self.setup_components()
 
+
+
     def update(self):
         for component in self.components:
             component.update()

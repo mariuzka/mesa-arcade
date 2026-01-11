@@ -22,8 +22,6 @@ agents = mesar.CellAgentArtists(
     color_map={0: "blue", 1: "red"},
 )
 ```
-
-<br>
 <br>
 
 ### SpacePlots
@@ -43,7 +41,6 @@ We could add other artists, too.
 grid_space = mesar.GridSpacePlot(artists=[agents])
 ```
 <br>
-<br>
 
 ### HistoryPlots
 
@@ -60,21 +57,49 @@ Let's add a `ModelHistoryPlot` that visualizes the model attribute `happy` over 
 ```python
 happy_plot = mesar.ModelHistoryPlot(y_attributes=["happy"])
 ```
+<br>
 
 ### Controllers
 
-Interactive controllers of model attributes / parameters.
+Interactive controllers of model attributes and parameters.
 
 - `NumController`: A controller for metric parameters.
 - `CatController`: A controlelr for categorial paremeters.
 
-**Example
+**Example**
+
+Let's add a controller that determines the value of the model parameter `homophily`:
+
+```python
+homophily = mesar.NumController(
+    parameter_name="homophily", 
+    parameter_value=0.4, 
+    min_value=0,
+    max_value=1,
+    step=0.125,
+    )
+```
 
 ### Canvas
 
 The `Canvas` is the main window in which all components are placed.
 
+**Example**
+
+```python
+canvas = mesar.Canvas(
+    model_class=Schelling, # the mesa model
+    plots=[space, happy_plot], # all plots
+    controllers=[density, minority_pc, homophily, width, height], # all controllers
+)
+
+# start the visualization
+canvas.show()
+```
+
 ## Full example
+
+More examples can be found in [`"mesa-arcade/examples/"`](https://github.com/mariuzka/mesa-arcade/tree/main/examples).
 
 ```{python}
 import mesa_arcade as mesar

@@ -80,6 +80,3 @@ class Figure:
             color=arcade.color.BLACK,
         )
         self.shape_list.append(outline)
-
-
-

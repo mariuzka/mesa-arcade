@@ -1,5 +1,6 @@
 from mesa_arcade.figure import Figure
 
+
 class GridSpacePlot(Figure):
     def __init__(self, artists=[], background_color="white", title=None, space_attr_name="grid"):
         if not isinstance(artists, (list, tuple)):

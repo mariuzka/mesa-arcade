@@ -17,31 +17,31 @@ class Canvas:
         target_fps: int = 40,
         rendering_step: int = 1,
     ) -> None:
-        """"
+        """ "
         Creates a new canvas instance.
 
         Args:
-            model_class (type[mesa.Model]): 
+            model_class (type[mesa.Model]):
                 The mesa model class.
-            plots (list, optional): 
-                The list of controllers that should be placed in the canvas. 
+            plots (list, optional):
+                The list of controllers that should be placed in the canvas.
                 Currently, the maximum number of plots is 4.
                 Defaults to [].
-            controllers (list, optional): 
-                The list of controllers that should be placed in the canvas. 
+            controllers (list, optional):
+                The list of controllers that should be placed in the canvas.
                 Defaults to [].
-            window_width (int, optional): 
+            window_width (int, optional):
                 The width of the canvas window in pixels.
                 Determines the height of the canvas.
                 Defaults to 1200.
             window_title (str, optional):
-                The title of the canvas. 
+                The title of the canvas.
                 Defaults to "Mesa-arcade".
             target_fps (int, optional):
-                The number of frames per second (FPS) that the animations should show. 
+                The number of frames per second (FPS) that the animations should show.
                 Defaults to 40.
             rendering_step (int, optional):
-                The number of simulation steps until the visualizations are rerendered. 
+                The number of simulation steps until the visualizations are rerendered.
                 Defaults to 1.
         """
         window_height = int(window_width * 0.6)

@@ -16,7 +16,7 @@ class Artist:
         color_vmax: float | None = None,
         shape: str = "rect",
         size: float = 1,
-        entity_selector = lambda entity: True,
+        entity_selector=lambda entity: True,
         jitter: bool = False,
         dynamic_color: bool = True,
         dynamic_position: bool = True,
@@ -203,6 +203,7 @@ class CellAgentArtists(Artist):
     """
     A visual representation of CellAgents.
     """
+
     def __init__(
         self,
         color: str | tuple | list | None = "black",
@@ -212,7 +213,7 @@ class CellAgentArtists(Artist):
         color_vmax: float | None = None,
         shape: str = "circle",
         size: float = 1,
-        entity_selector = lambda entity: True,
+        entity_selector=lambda entity: True,
         jitter: bool = False,
         dynamic_color: bool = True,
         dynamic_position: bool = True,
@@ -250,6 +251,7 @@ class CellArtists(Artist):
     """
     A visual representation of Cells.
     """
+
     def __init__(
         self,
         color: str | tuple | list | None = "grey",
@@ -259,7 +261,7 @@ class CellArtists(Artist):
         color_vmax: float | None = None,
         shape: str = "rect",
         size: float = 1,
-        entity_selector = lambda entity: True,
+        entity_selector=lambda entity: True,
         jitter: bool = False,
         dynamic_color: bool = True,
         dynamic_position: bool = False,
@@ -297,6 +299,7 @@ class ContinuousSpaceAgentArtists(Artist):
     """
     A visual representation of ContinuousSpaceAgents.
     """
+
     def __init__(
         self,
         color: str | tuple | list | None = "black",
@@ -306,7 +309,7 @@ class ContinuousSpaceAgentArtists(Artist):
         color_vmax: float | None = None,
         shape: str = "circle",
         size: float = 2,
-        entity_selector = lambda entity: True,
+        entity_selector=lambda entity: True,
         jitter: bool = False,
         dynamic_color: bool = True,
         dynamic_position: bool = True,

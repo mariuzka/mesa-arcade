@@ -52,7 +52,7 @@ canvas = mesar.Canvas(
     plots=[
         space_plot, 
         price_plot, 
-        #traders_plot,
+        traders_plot,
     ],
     controllers=[
         initial_population,

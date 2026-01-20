@@ -5,6 +5,7 @@ import mesa
 
 from mesarcade.button import DefaultButtons
 from mesarcade.controller import NumController
+from mesarcade.utils import parse_color
 
 
 class Renderer(arcade.View):
@@ -43,7 +44,7 @@ class Renderer(arcade.View):
         self.manager = arcade.gui.UIManager()
         self.manager.enable()
         self.manager.add(self.anchor)
-        self.background_color = (235, 236, 238)
+        self.background_color = parse_color("whitesmoke")
         self.font_color = (45, 45, 50)
 
         # calculate window properties

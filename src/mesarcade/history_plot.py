@@ -47,7 +47,7 @@ class _ModelHistoryPlot:
             arcade.color.RED,
             arcade.color.PINK,
             arcade.color.PURPLE,
-        ]
+            ]
 
     def setup(self, figure, renderer):
         self.figure = figure
@@ -86,7 +86,7 @@ class _ModelHistoryPlot:
             center_y=self.plot_area_y + self.plot_area_height / 2,
             width=self.plot_area_width,
             height=self.plot_area_height,
-            color=arcade.color.GRAY,
+            color=arcade.color.WHITE,
         )
         self.figure.shape_list.append(background)
 
@@ -96,7 +96,7 @@ class _ModelHistoryPlot:
             width=self.plot_area_width,
             height=self.plot_area_height,
             color=arcade.color.BLACK,
-            border_width=1,
+            border_width=2,
         )
         self.figure.shape_list.append(outline)
 

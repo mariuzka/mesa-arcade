@@ -32,11 +32,22 @@ def rescale_array_column_inplace(
 
 
 class _ModelHistoryPlot:
-    def __init__(self, y_attributes, step=5, legend=True):
-        if len(y_attributes) > 6:
+    def __init__(
+        self, 
+        model_attributes: str, 
+        labels: list[str] | None = None, 
+        step: int = 10, 
+        legend: bool = True,
+    ):
+        if len(model_attributes) > 6:
             raise ValueError("Only 6 lines allowed!")
+        
+        if labels is not None:
+            if len(model_attributes) != len(labels):
+                raise ValueError("The arguments model_attributes and labels must have the same length.")
 
-        self.y_attrs = y_attributes
+        self.model_attrs = model_attributes
+        self.labels = labels
         self.step = step
         self.legend = legend
 
@@ -66,8 +77,8 @@ class _ModelHistoryPlot:
         self.plot_area_width = self.width * (0.85 - 0.025)
         self.plot_area_height = self.height * (0.7 - 0.025)
 
-        self.data_dict = {y_attr: [] for y_attr in self.y_attrs}
-        self.scaled_data_dict = {y_attr: [] for y_attr in self.y_attrs}
+        self.data_dict = {model_attr: [] for model_attr in self.model_attrs}
+        self.scaled_data_dict = {model_attr: [] for model_attr in self.model_attrs}
         self.min_y = 0
         self.max_y = 0
         self.min_x = 0
@@ -122,7 +133,8 @@ class _ModelHistoryPlot:
         label_x = self.figure.x + self.width * 0.1
         label_y = self.plot_area_y - self.height * 0.1
 
-        for i, y_attr in enumerate(self.y_attrs):
+        labels = self.model_attrs if self.labels is None else self.labels
+        for i, label in enumerate(labels):
             if i % 2 == 0:
                 label_y -= self.font_size * 2
             if i % 2 != 0:
@@ -130,15 +142,15 @@ class _ModelHistoryPlot:
             else:
                 label_x_ = label_x
 
-            label_text = arcade.Text(
-                text=y_attr,
+            label_element = arcade.Text(
+                text=label,
                 x=label_x_,
                 y=label_y,
                 batch=self.figure.text_batch,
                 color=self.renderer.font_color,
                 font_size=self.font_size,
             )
-            self.figure.text_list.append(label_text)
+            self.figure.text_list.append(label_element)
 
             color_dot = arcade.shape_list.create_ellipse(
                 center_x=label_x_ - self.font_size,
@@ -157,17 +169,17 @@ class _ModelHistoryPlot:
         if tick % self.step == 0 or tick <= 1:
             
             # for each model attribute that has to be collected
-            for y_attr in self.y_attrs:
+            for model_attr in self.model_attrs:
                 
                 # check if the model has the attribute
                 # TODO: Improve this. Maybe ask whether to use the datacollector or not.
-                if hasattr(self.renderer.model, y_attr):
-                    y = getattr(self.renderer.model, y_attr)
+                if hasattr(self.renderer.model, model_attr):
+                    y = getattr(self.renderer.model, model_attr)
 
                 # if not
                 else:
                     # get the data from the datacollector
-                    y_data = self.renderer.model.datacollector.model_vars[y_attr]
+                    y_data = self.renderer.model.datacollector.model_vars[model_attr]
                     y = y_data[-1] if len(y_data) > 0 else None
 
                 # update min and max values
@@ -176,11 +188,11 @@ class _ModelHistoryPlot:
                         self.max_y = y
                     elif y < self.min_y:
                         self.min_y = y
-                    self.data_dict[y_attr].append((tick, y))
+                    self.data_dict[model_attr].append((tick, y))
 
                 # Rescale the data
                 # TODO: Optimize this with numpy
-                self.scaled_data_dict[y_attr] = [
+                self.scaled_data_dict[model_attr] = [
                     (
                         rescale(
                             value=x,
@@ -199,7 +211,7 @@ class _ModelHistoryPlot:
                         )
                         - self.plot_area_height,
                     )
-                    for x, y in self.data_dict[y_attr]
+                    for x, y in self.data_dict[model_attr]
                 ]
 
             # update lower y_label
@@ -218,21 +230,22 @@ class _ModelHistoryPlot:
                 )
 
     def draw(self):
-        for i, y_attr in enumerate(self.y_attrs):
+        for i, model_attr in enumerate(self.model_attrs):
             arcade.draw_line_strip(
-                self.scaled_data_dict[y_attr],
+                self.scaled_data_dict[model_attr],
                 color=self.color_list[i],
                 line_width=2,
             )
 
 
 class ModelHistoryPlot(Figure):
-    def __init__(self, y_attributes, legend=True, title=None):
-        if not isinstance(y_attributes, (list, tuple)):
-            y_attributes = [y_attributes]
+    def __init__(self, model_attributes, labels=[], legend=True, title=None):
+        if not isinstance(model_attributes, (list, tuple)):
+            model_attributes = [model_attributes]
 
         plot = _ModelHistoryPlot(
-            y_attributes=y_attributes,
+            model_attributes=model_attributes,
+            labels=labels,
             legend=legend,
         )
         super().__init__(components=[plot], title=title, space_attr_name=None)

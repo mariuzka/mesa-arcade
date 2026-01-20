@@ -29,8 +29,8 @@ def test_sugarscape():
     space_plot = mesar.GridSpacePlot(artists=[sugar, spice, agents])
 
     # line plots
-    price_plot = mesar.ModelHistoryPlot(y_attributes=["Price"])
-    traders_plot = mesar.ModelHistoryPlot(y_attributes=["#Traders"])
+    price_plot = mesar.ModelHistoryPlot(model_attributes=["Price"])
+    traders_plot = mesar.ModelHistoryPlot(model_attributes=["#Traders"])
 
     # controllers
     density = mesar.NumController("density", 0.8, 0.1, 0.9, 0.1)

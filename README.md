@@ -60,7 +60,19 @@ Line plots that plot (multiple) values as a function of the simulated time steps
 Let's add a `ModelHistoryPlot` that visualizes the model attribute `happy` over time:
 
 ```python
-happy_plot = mesar.ModelHistoryPlot(y_attributes=["happy"])
+happy_plot = mesar.ModelHistoryPlot(model_attributes=["happy"], labels=["Happy agents"])
+```
+
+### ValueDisplay
+
+Text-based display for showing a single value of a model attribute.
+
+**Example**
+
+Let's add a `ValueDisplay` that shows the current value of the model attribute `happy`:
+
+```python
+happy_value = mesar.ValueDisplay(model_attribute="happy", label="Happy agents")
 ```
 
 ### Controllers
@@ -106,7 +118,7 @@ canvas.show()
 *More examples can be found in [`"/mesarcade/examples"`](https://github.com/mariuzka/mesarcade/tree/main/examples).*
 
 ```python
-import mesa_arcade as mesar
+import mesarcade as mesar
 from mesa.examples.basic.schelling.model import Schelling
 
 # artists
@@ -117,10 +129,13 @@ agents = mesar.CellAgentArtists(
 )
 
 # space plot
-space = mesar.GridSpacePlot(artists=[agents])
+space = mesar.GridSpacePlot(artists=agents)
 
 # line plot
-happy_plot = mesar.ModelHistoryPlot(y_attributes=["happy"])
+happy_plot = mesar.ModelHistoryPlot(model_attributes=["happy"], labels=["Happy agents"])
+
+# value display
+happy_value = mesar.ValueDisplay(model_attribute="happy", label="Happy agents")
 
 # controllers
 density = mesar.NumController("density", 0.8, 0.1, 0.9, 0.1)
@@ -133,6 +148,7 @@ height = mesar.NumController("height", 100, 10, 200, 10)
 canvas = mesar.Canvas(
     model_class=Schelling,
     plots=[space, happy_plot],
+    value_displays=[happy_value],
     controllers=[density, minority_pc, homophily, width, height],
 )
 
